@@ -1,0 +1,28 @@
+Select d.name AS department_name, AVG(e.age) AS average_age
+from employees e
+JOIN departments d ON e.department_id = d.id
+GROUP BY d.name;
+
+
+Select d.name AS department_name, COUNT(e.id) AS employee_count
+from employees e
+JOIN departments d ON e.department_id = d.id
+where e.age > 40
+GROUP BY d.name
+ORDER BY employee_count desc
+LIMIT 1;
+
+
+SELECT COUNT(*) AS recent_joiners
+FROM employees
+WHERE joining_date >= current_date() - interval 100 DAY;
+
+
+UPDATE employees 
+SET joining_date = current_date() - interval 1 DAY
+WHERE department_id = (select id from departments where name = 'HR');
+
+
+SELECT COUNT(*) AS recent_joiners
+FROM employees
+WHERE joining_date >= current_date() - interval 100 DAY;
